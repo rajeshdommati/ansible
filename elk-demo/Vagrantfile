@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    config.vm.box = "chef/centos-7.1"
+
+    config.vm.define "elk_1" do |elk_1|
+        elk_1.vm.provider :virtualbox do |vbox|
+            vbox.customize ["modifyvm", :id, "--name", "elk_1"]
+	  vbox.customize ["modifyvm", :id, "--memory", "3072"]
+        end
+        elk_1.vm.network :private_network, ip: "192.168.33.101"
+    end
+
+    config.vm.define "elk_2" do |elk_2|
+        elk_2.vm.provider :virtualbox do |vbox|
+            vbox.customize ["modifyvm", :id, "--name", "elk_2"]
+           vbox.customize ["modifyvm", :id, "--memory", "1024"]
+	end
+        elk_2.vm.network :private_network, ip: "192.168.33.102"
+    end
+  
+    config.vm.define "elk_3" do |elk_3|
+        elk_3.vm.provider :virtualbox do |vbox|
+           vbox.customize ["modifyvm", :id, "--name", "elk_3"]
+           vbox.customize ["modifyvm", :id, "--memory", "1024"]
+        end
+        elk_3.vm.network :private_network, ip: "192.168.33.103"
+    end	
+
+end

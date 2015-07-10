@@ -1,0 +1,3 @@
+---
+- name: install java 8 in all the cent os boxes
+	yum: name=java-1.8.0-openjdk-headless state=present 
